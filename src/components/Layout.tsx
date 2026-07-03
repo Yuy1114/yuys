@@ -102,7 +102,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {t.nav.language}
           </button>
           <a
-            href="https://github.com/Jade1114"
+            href="https://github.com/Yuy1114"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-ghost btn-circle"
@@ -123,7 +123,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="flex flex-wrap justify-between items-center w-full max-w-5xl mx-auto">
           <p>© 2026 Yuy. {t.common.builtWith}</p>
           <div className="flex gap-4">
-            <a href="https://github.com/Jade1114" target="_blank" rel="noopener noreferrer" className="link link-hover">
+            <a href="https://github.com/Yuy1114" target="_blank" rel="noopener noreferrer" className="link link-hover">
               GitHub
             </a>
             <a href="mailto:Zhi_Yuzzz@outlook.com" className="link link-hover">

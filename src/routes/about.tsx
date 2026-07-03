@@ -92,7 +92,7 @@ function About() {
                   Gmail
                 </a>
                 <a
-                  href="https://github.com/Jade1114"
+                  href="https://github.com/Yuy1114"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-outline"
