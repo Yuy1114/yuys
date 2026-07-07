@@ -1,74 +1,24 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tanstack/react-router'
 import { useI18n } from '../lib/i18n'
 
 export const Route = createFileRoute('/skills')({
   component: Skills,
 })
 
-const categories = [
-  {
-    name: 'Backend',
-    icon: '⚙️',
-    color: 'primary',
-    skills: [
-      { name: 'Java', level: 4 },
-      { name: 'Spring Boot / MyBatis', level: 4 },
-      { name: 'MySQL', level: 4 },
-      { name: 'Redis', level: 3 },
-      { name: 'RabbitMQ', level: 3 },
-      { name: 'WebSocket', level: 3 },
-    ],
-  },
-  {
-    name: 'Frontend',
-    icon: '🎨',
-    color: 'secondary',
-    skills: [
-      { name: 'React', level: 3 },
-      { name: 'TypeScript', level: 3 },
-      { name: 'Vue 3', level: 3 },
-      { name: 'TailwindCSS / daisyUI', level: 3 },
-    ],
-  },
-  {
-    name: 'Product & Delivery',
-    icon: '🧭',
-    color: 'accent',
-    skills: [
-      { name: 'MVP scoping', level: 3 },
-      { name: 'Acceptance criteria', level: 3 },
-      { name: 'Manual validation', level: 3 },
-      { name: 'Project retrospectives', level: 3 },
-    ],
-  },
-  {
-    name: 'AI Engineering',
-    icon: '🤖',
-    color: 'info',
-    skills: [
-      { name: 'Claude Code / Codex', level: 4 },
-      { name: 'Agent Runtime', level: 3 },
-      { name: 'Context engineering', level: 3 },
-      { name: 'Tool calling', level: 2 },
-    ],
-  },
-]
-
 function Skills() {
   const { t } = useI18n()
 
-  const levelLabel = (level: number) => t.skills.levels[level] ?? t.skills.levels[0]
-
   return (
     <div className="max-w-5xl mx-auto px-4 py-12">
-      <div className="mb-12 max-w-3xl">
+      <div className="mb-14 max-w-3xl">
         <h1 className="text-4xl font-bold mb-3">{t.skills.title}</h1>
         <p className="text-base-content/60 text-lg leading-relaxed">
           {t.skills.subtitle}
         </p>
       </div>
 
-      <section className="mb-12">
+      {/* Act 1 — the claim */}
+      <section className="mb-16">
         <div className="mb-6 max-w-3xl">
           <p className="text-sm uppercase tracking-[0.2em] text-primary mb-3">Capability</p>
           <h2 className="text-3xl font-bold mb-3">{t.skills.capabilityTitle}</h2>
@@ -89,62 +39,48 @@ function Skills() {
         </div>
       </section>
 
-      <section className="mb-12">
+      {/* Act 2 — the proof */}
+      <section className="mb-16">
         <div className="mb-6 max-w-3xl">
-          <p className="text-sm uppercase tracking-[0.2em] text-primary mb-3">Stack</p>
-          <h2 className="text-3xl font-bold mb-3">{t.skills.stackTitle}</h2>
+          <p className="text-sm uppercase tracking-[0.2em] text-primary mb-3">Evidence</p>
+          <h2 className="text-3xl font-bold mb-3">{t.skills.proofTitle}</h2>
           <p className="text-base-content/60 leading-relaxed">
-            {t.skills.stackSubtitle}
+            {t.skills.proofSubtitle}
           </p>
         </div>
-        <div className="grid gap-6 md:grid-cols-2">
-          {categories.map((category) => (
-            <div key={category.name} className="card bg-base-200 border border-base-300">
-              <div className="card-body">
-                <h2 className="card-title">
-                  <span className="text-2xl mr-2">{category.icon}</span>
-                  {category.name}
-                </h2>
-                <div className="mt-4 space-y-3">
-                  {category.skills.map((skill) => (
-                    <div key={skill.name}>
-                      <div className="flex justify-between items-center mb-1 gap-3">
-                        <span className="text-sm font-medium">{skill.name}</span>
-                        <span className={`text-xs badge badge-${category.color} badge-soft badge-sm shrink-0`}>
-                          {levelLabel(skill.level)}
-                        </span>
-                      </div>
-                      <progress
-                        className={`progress w-full progress-${category.color}`}
-                        value={skill.level}
-                        max="4"
-                      />
-                    </div>
-                  ))}
+        <div className="space-y-4">
+          {t.skills.proofLanes.map((lane) => (
+            <Link
+              key={lane.capability}
+              to="/projects"
+              className="group card bg-base-200 border border-base-300 hover:border-primary/50 hover:-translate-y-0.5 transition-all duration-300"
+            >
+              <div className="card-body gap-4 md:flex-row md:items-center">
+                <div className="md:flex-1">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="font-mono text-xs text-primary">◆</span>
+                    <h3 className="text-lg font-bold">{lane.capability}</h3>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    {lane.tools.map((tool) => (
+                      <span key={tool} className="badge badge-soft badge-sm">{tool}</span>
+                    ))}
+                  </div>
+                  <p className="text-sm text-base-content/60 leading-relaxed">{lane.evidence}</p>
+                </div>
+                <div className="md:w-52 md:shrink-0 md:border-l md:border-base-300 md:pl-6">
+                  <p className="text-xs uppercase tracking-wide text-base-content/40 mb-2">
+                    {t.skills.evidenceLabel}
+                  </p>
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">{lane.icon}</span>
+                    <span className="font-semibold leading-tight">{lane.project}</span>
+                    <span className="text-primary opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all">→</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
-        </div>
-      </section>
-
-      <section className="card bg-base-200 border border-base-300">
-        <div className="card-body">
-          <h2 className="card-title">
-            <span className="text-2xl mr-2">📚</span>
-            {t.skills.currentlyDeepening}
-          </h2>
-          <p className="text-sm text-base-content/50 mb-4">
-            {t.skills.learningSubtitle}
-          </p>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {t.skills.learning.map((item, i) => (
-              <div key={i} className="flex items-start gap-2 rounded-box bg-base-100/60 border border-base-300 p-3">
-                <span className="text-primary mt-0.5 text-xs shrink-0">▶</span>
-                <span className="text-sm text-base-content/70 leading-relaxed">{item}</span>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
     </div>

@@ -30,15 +30,20 @@ function Home() {
             <p className="text-base-content/70 mb-4 max-w-2xl mx-auto leading-relaxed">
               {t.home.intro}
             </p>
-            <p className="text-base-content/60 mb-8 max-w-2xl mx-auto leading-relaxed">
-              {t.home.belief}
-            </p>
+            {t.home.belief && (
+              <p className="text-base-content/60 mb-8 max-w-2xl mx-auto leading-relaxed">
+                {t.home.belief}
+              </p>
+            )}
             <div className="flex gap-4 justify-center flex-wrap">
               <Link to="/projects" className="btn btn-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clipRule="evenodd" />
                 </svg>
                 {t.home.projectsCta}
+              </Link>
+              <Link to="/skills" className="btn btn-soft btn-primary">
+                {t.nav.skills}
               </Link>
               <a href="/resume.pdf" className="btn btn-soft btn-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -126,7 +131,6 @@ function Home() {
             </div>
             <div className="flex flex-wrap gap-3 md:justify-end">
               <Link to="/skills" className="btn btn-outline btn-sm">{t.nav.skills}</Link>
-              <a href="mailto:Zhi_Yuzzz@outlook.com" className="btn btn-primary btn-sm">Email</a>
             </div>
           </div>
         </div>

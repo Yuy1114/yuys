@@ -12,9 +12,11 @@ function Projects() {
     <div className="max-w-5xl mx-auto px-4 py-12">
       <div className="mb-12">
         <h1 className="text-4xl font-bold mb-3">{t.projects.title}</h1>
-        <p className="text-base-content/60 text-lg">
-          {t.projects.subtitle}
-        </p>
+        {t.projects.subtitle && (
+          <p className="text-base-content/60 text-lg">
+            {t.projects.subtitle}
+          </p>
+        )}
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
@@ -83,8 +85,6 @@ function Projects() {
                   {t.common.source}
                 </a>
               </div>
-
-              <p className="text-xs text-base-content/30 font-mono mt-2">{project.stats}</p>
             </div>
           </div>
         ))}
